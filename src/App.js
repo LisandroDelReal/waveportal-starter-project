@@ -9,6 +9,8 @@ export default function App() {
     */
   const [currentAccount, setCurrentAccount] = useState("");
 
+  const [totalWaves, setTotalWaves]=useState(0);
+
   const contractAddress = "0x625b40ad0853504b1E7cc32E01F5830F6578b9df";
 
   const contractABI = abi.abi;
@@ -74,6 +76,7 @@ export default function App() {
         const wavePortalContract = new ethers.Contract(contractAddress, contractABI, signer);
 
         let count = await wavePortalContract.getTotalWaves();
+        
         console.log("Retrieved total wave count ... ", count.toNumber());
 
         const waveTxn = await wavePortalContract.wave();
@@ -83,6 +86,7 @@ export default function App() {
         console.log("Mined -- ", waveTxn.hash);
 
         count = await wavePortalContract.getTotalWaves();
+        setTotalWaves(count);
         console.log("Retrieved total wave count ... ", count.toNumber());
       }else{
         console.log("Ethereum object doesn't exist!");
@@ -114,7 +118,7 @@ export default function App() {
           Wave at Me
         </button>
 
-
+ 
         {/*
         * If there is no currentAccount render this button
         */}
@@ -123,7 +127,11 @@ export default function App() {
             Connect Wallet
           </button>
         )}
-      </div>
+        
+        <div className="waves">
+          I received {totalWaves} waves! 
+        </div>
+     </div>
     </div>
   );
 }
