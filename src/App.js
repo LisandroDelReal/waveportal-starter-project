@@ -86,7 +86,7 @@ export default function App() {
         console.log("Mined -- ", waveTxn.hash);
 
         count = await wavePortalContract.getTotalWaves();
-        setTotalWaves(count);
+        setTotalWaves(count.toNumber());
         console.log("Retrieved total wave count ... ", count.toNumber());
       }else{
         console.log("Ethereum object doesn't exist!");
