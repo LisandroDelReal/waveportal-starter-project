@@ -3,8 +3,14 @@ import { ethers } from "ethers";
 import './App.css';
 
 export default function App() {
+  /*
+    * Just a state variable we use to store our user's public wallet.
+    */
+  const [currentAccount, setCurrentAccount] = useState("");
 
-  const checkIfWalletIsConnected = () => {
+  const checkIfWalletIsConnected = async () => {
+
+    
     /*
     * First make sure we have access to window.ethereum
     */
